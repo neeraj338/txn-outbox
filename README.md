@@ -1,8 +1,8 @@
 
 ### Txn outbox ( a.k.a. Outbox pattern)
 ``` 
-Is custom cloud stream binder that accept a message (binary or text)
-& Stores it in DB to maintain trasaction and atleat once delivery guarantee.
+Is custom cloud stream binder that accepts a message (binary or text)
+& Stores it in DB to maintain transaction and at-least once delivery guarantee.
 ```
 
 #### How it works
