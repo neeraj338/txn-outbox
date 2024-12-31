@@ -1,0 +1,21 @@
+@startuml
+
+participant service as svc
+participant outbox_binder as outbox
+database DB as db
+participant scheduler as scheduler
+participant kafka_binder as kafka
+participant producer_ack_listener as listener
+
+svc->outbox: send a message
+outbox->db: store message and \n destination binding info
+loop delay x second
+  scheduler->db: poll pending records
+  scheduler->kafka: send to destination
+end
+kafka->listener: ack
+listener->db: ack, message send success
+loop PURGE x days
+  scheduler->db: purge old DELIVERED records\n based on configuration
+end
+@enduml
